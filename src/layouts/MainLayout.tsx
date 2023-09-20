@@ -1,21 +1,19 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import useGetUserInfo from '../hooks/useGetUserInfo'
-import { Layout } from 'antd';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { useKeyPress } from 'ahooks';
+import { Layout, Spin } from 'antd';
+import useLoadUserData from '../hooks/useLoadUserData';
 const { Header, Footer, Content } = Layout;
-
-
 const MainLayout = () => {
-  const { username, nickname } = useGetUserInfo()
+  const { waitingUserData } = useLoadUserData();
+
   return (
     <Layout>
-      <Header >Header</Header>
-      <Content>
-        <Outlet></Outlet>
-        </Content>
-      <Footer >Footer</Footer>
+      <Header>Header</Header>
+      <Content>{waitingUserData ? <Spin></Spin> : <Outlet></Outlet>}</Content>
+      <Footer>Footer</Footer>
     </Layout>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;
