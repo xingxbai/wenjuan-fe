@@ -1,7 +1,11 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout'
+import ManageLayout from '../layouts/ManageLayout'
 import Login from '../pages/Login'
+import List from '../pages/manage/List'
+import Star from '../pages/manage/List'
+import Trash from '../pages/manage/List'
 
 
 const router = createBrowserRouter([
@@ -12,7 +16,25 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login/>
-      }
+      },
+      {
+        path: 'manage',
+        element: <ManageLayout />,
+        children: [
+          {
+            path: 'list',
+            element: <List />,
+          },
+          {
+            path: 'star',
+            element: <Star />,
+          },
+          {
+            path: 'trash',
+            element: <Trash />,
+          },
+        ],
+      },
     ]
   }
 ])
