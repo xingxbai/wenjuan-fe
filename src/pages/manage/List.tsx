@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from 'antd';
 import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import ListPage from '../../components/ListPage';
+import ListSearch from '../../components/ListSearch';
 const List: React.FC = () => {
   const [queryParams, setQueryParams] = useState({});
   const [page, setPage] = useState(1);
@@ -25,15 +27,8 @@ const List: React.FC = () => {
   };
   return (
     <div>
-      <Pagination
-        current={page}
-        pageSize={pageSize}
-        total={total}
-        showSizeChanger
-        showQuickJumper
-        showTotal={(total) => `Total ${total} items`}
-        onChange={handlePaginationChange}
-      />
+      <ListSearch></ListSearch>
+      <ListPage total={139} />
     </div>
   );
 };
