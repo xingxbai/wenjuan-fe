@@ -24,6 +24,10 @@ jobs:
         with:
           node-version: lts/*
 
+      # 删除依赖
+      - name: 删除依赖
+        run: rm -rf node_modules
+
       # 安装依赖
       - name: 安装依赖
         run: npm install
