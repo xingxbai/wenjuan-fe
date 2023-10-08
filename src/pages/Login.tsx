@@ -1,60 +1,62 @@
-import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
-import { Form, Input, Checkbox, Space, Button, message } from 'antd'
-import { useRequest } from 'ahooks'
-import { REGISTER_PATHNAME } from '../router/index'
-import { loginService } from '../services/user'
-import { setToken } from '../utils/user-token'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Input, Checkbox, Space, Button, message } from 'antd';
+import { useRequest } from 'ahooks';
+import { REGISTER_PATHNAME } from '../router/index';
+import { loginService } from '../services/user';
+import { setToken } from '../utils/user-token';
 
-const USERNAME_KEY = 'USERNAME'
-const PASSWORD_KEY = 'PASSWORD'
+const USERNAME_KEY = 'USERNAME';
+const PASSWORD_KEY = 'PASSWORD';
 
-function rememberUser (username: string, password: string) {
-  localStorage.setItem(USERNAME_KEY, username)
-  localStorage.setItem(PASSWORD_KEY, password)
+function rememberUser(username: string, password: string) {
+  localStorage.setItem(USERNAME_KEY, username);
+  localStorage.setItem(PASSWORD_KEY, password);
 }
 
 function deleteUserFromStorage() {
-  localStorage.removeItem(USERNAME_KEY)
-  localStorage.removeItem(PASSWORD_KEY)
+  localStorage.removeItem(USERNAME_KEY);
+  localStorage.removeItem(PASSWORD_KEY);
 }
 
 function getUserInfoFromStorage() {
   return {
     username: localStorage.getItem(USERNAME_KEY),
-    password: localStorage.getItem(PASSWORD_KEY)
-
-  }
+    password: localStorage.getItem(PASSWORD_KEY),
+  };
 }
 const Login: React.FC = () => {
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
-  useEffect(()=> {
-    const { username, password } = getUserInfoFromStorage()
-    form.setFieldsValue({ username, password }) 
-  }, [])
+  useEffect(() => {
+    const { username, password } = getUserInfoFromStorage();
+    form.setFieldsValue({ username, password });
+  }, []);
 
-  const { loading, run } = useRequest(async (username, password)=>{
-    return await loginService(username, password)
-  }, {
-    manual: true,
-    onSuccess: (result) => {
-      const { token } = result
-      setToken(token)
-    }
-  })
+  const { loading, run } = useRequest(
+    async (username, password) => {
+      return await loginService(username, password);
+    },
+    {
+      manual: true,
+      onSuccess: (result) => {
+        const { token } = result;
+        setToken(token);
+      },
+    },
+  );
 
   const onFinish = (values: any) => {
-    console.log("rd ~ file: Login.tsx:6 ~ onFinish ~ values:", values)
-    const { username, password, remember } = values || {}
-    run(username, password)
+    console.log('rd ~ file: Login.tsx:6 ~ onFinish ~ values:', values);
+    const { username, password, remember } = values || {};
+    run(username, password);
 
     if (remember) {
-      rememberUser(username, password)
+      rememberUser(username, password);
     } else {
-      deleteUserFromStorage()
+      deleteUserFromStorage();
     }
-  }
+  };
 
   return (
     <Form
@@ -62,7 +64,7 @@ const Login: React.FC = () => {
       onFinish={onFinish}
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 16 }}
-      initialValues={{remember: true}}
+      initialValues={{ remember: true }}
     >
       <Form.Item
         name="username"
@@ -75,10 +77,15 @@ const Login: React.FC = () => {
       >
         <Input placeholder="请输入账号"></Input>
       </Form.Item>
-      <Form.Item name="password" label="密码" rules={[{required: true}]}>
+      <Form.Item name="password" label="密码" rules={[{ required: true }]}>
         <Input.Password placeholder="请输入密码"></Input.Password>
       </Form.Item>
-      <Form.Item name="remember" label="" wrapperCol={{ offset: 6, span: 16 }} valuePropName="checked">
+      <Form.Item
+        name="remember"
+        label=""
+        wrapperCol={{ offset: 6, span: 16 }}
+        valuePropName="checked"
+      >
         <Checkbox>记住我</Checkbox>
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
@@ -90,7 +97,7 @@ const Login: React.FC = () => {
         </Space>
       </Form.Item>
     </Form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useKeyPress } from 'ahooks';
 import { Layout, Spin } from 'antd';
 import useLoadUserData from '../hooks/useLoadUserData';
 import useNavPage from '../hooks/useNavPage';
