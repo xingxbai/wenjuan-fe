@@ -4,7 +4,7 @@ module.exports = {
       if (webpackConfig.mode === 'production') {
         // 抽离公共代码，只在生产环境
         if (webpackConfig.optimization == null) {
-          webpackConfig.optimization = {}
+          webpackConfig.optimization = {};
         }
         webpackConfig.optimization.splitChunks = {
           chunks: 'all',
@@ -25,9 +25,9 @@ module.exports = {
               priority: 98,
             },
           },
-        }
+        };
       }
-      return webpackConfig
+      return webpackConfig;
     },
   },
 
@@ -37,4 +37,4 @@ module.exports = {
       '/api': 'http://1.14.103.59:3001', // Mock
     },
   },
-}
+};
