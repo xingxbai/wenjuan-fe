@@ -38,23 +38,33 @@ jobs:
       # 打包
       - name: 打包
         run: npm run build
-      # 上传到腾讯云
-      - name: 发布到腾讯云
-        uses: easingthemes/ssh-deploy@main
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          # 私钥
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          # SCP参数
-          ARGS: '-avzr --delete'
-          # 源目录
-          SOURCE: '.vitepress/dist/'
-          # 服务器ip
-          REMOTE_HOST: ${{ secrets.REMOTE_TXHOST }}
-          # 用户
-          REMOTE_USER: 'root'
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: dist # 这是要复制到阿里云静态服务器的文件夹名称
+          REMOTE_HOST: '1.14.103.59' # 你的阿里云公网地址
+          REMOTE_USER: root # 阿里云登录后默认为 root 用户，并且所在文件夹为 root
+          TARGET: /root/node-server # 打包后的 dist 文件夹将放在 /root/node-server
+      # 上传到腾讯云
+      # - name: 发布到腾讯云
+      #   uses: easingthemes/ssh-deploy@main
+      #   env:
+      #     # 私钥
+      #     SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      #     # SCP参数
+      #     ARGS: '-avzr --delete'
+      #     # 源目录
+      #     SOURCE: '.vitepress/dist/'
+      #     # 服务器ip
+      #     REMOTE_HOST: ${{ secrets.REMOTE_TXHOST }}
+      #     # 用户
+      #     REMOTE_USER: 'root'
           # 目标地址
           # TARGET: '/var/www/html'
-          TARGET: '/root/demo.zuo11.com'
+          # TARGET: '/root/demo.zuo11.com'
       # 推送信息到微信
       # - name: 推送信息到微信
       #   uses: easychen/github-action-server-chan@main

@@ -13,9 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@main
       with:
-        node-version: '12.16.2'
+        node-version: lts/*
     # 删除依赖
     - name: 删除依赖
       run: rm -rf node_modules
