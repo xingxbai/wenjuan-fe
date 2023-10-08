@@ -46,7 +46,7 @@ const Login: React.FC = () => {
     },
   );
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: { username: string, password: string, remember: boolean}) => {
     const { username, password, remember } = values || {};
     run(username, password);
 
