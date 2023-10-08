@@ -14,7 +14,7 @@ function useNavPage(waitingUserData: boolean) {
 
   useEffect(() => {
     console.log(
-      'rd ~ file: useNavPage.ts:29 ~ useNavPage ~ waitingUserData, username, pathname:',
+      'rd ~ file: useNavPage.ts:29 ~ useNavPage ~ waitingUserData, username, pathname:111',
       waitingUserData,
       username,
       pathname,
