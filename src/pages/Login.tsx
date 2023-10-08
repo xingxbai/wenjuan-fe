@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Input, Checkbox, Space, Button, message } from 'antd';
+import { Form, Input, Checkbox, Space, Button } from 'antd';
 import { useRequest } from 'ahooks';
 import { REGISTER_PATHNAME } from '../router/index';
 import { loginService } from '../services/user';
@@ -47,7 +47,6 @@ const Login: React.FC = () => {
   );
 
   const onFinish = (values: any) => {
-    console.log('rd ~ file: Login.tsx:6 ~ onFinish ~ values:', values);
     const { username, password, remember } = values || {};
     run(username, password);
 

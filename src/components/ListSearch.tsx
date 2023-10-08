@@ -15,7 +15,7 @@ const ListSearch: FC = () => {
     setValue(curValue);
   }
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   useEffect(() => {
     setValue(searchParams.get(LIST_SEARCH_PARAM_KEY) || '');
   }, [searchParams]);
